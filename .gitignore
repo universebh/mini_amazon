@@ -1,0 +1,7 @@
+__pycache__
+**/__pycache__
+*.log
+**/*.log
+*.pyc
+**/*.pyc
+world_simulator_exec

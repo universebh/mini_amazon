@@ -1,0 +1,48 @@
+{% extends "miniamazon_app/base.html" %}
+{% load crispy_forms_tags %}
+<!-- Search Bar -->
+{% block content2 %}
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#"></a>
+    </div>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#"></a>
+    </div>
+
+    <form class="form-inline" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ProductSearchForm|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+        </div>
+    </form>
+
+    <!-- <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+{% endblock content2 %}
+
+<!-- Search  Button -->
+{% block content3 %}
+
+{% endblock content3 %}
+
+<!-- Side Bar -->
+{% block content1 %}
+<div class="content-section">
+    <h3>Options</h3>
+    <p class='text-muted'>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-light"><a href="{% url 'delivery-addr' %}">Address</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'amazon-cart' %}">Cart</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'order-history' %}">Orders</a></li>
+        </ul>
+    </p>
+</div>
+
+{% endblock content1%}
+
+{% block content %}{% endblock content %}

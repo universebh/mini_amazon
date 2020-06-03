@@ -1,0 +1,19 @@
+1. When submitting multiple orders in a short period, some orders' delivered message might not be able to be sent to our amazon backend.
+
+2. When clicking "Place Order" button, our wep-app will send the order details to the backend through socket, however, our web app might crash if the socket connect/send failed when trying to send the order message to the backend.
+
+3. We used multi-processing strategy since python has a global lock which will causes latency issue when handling multiple threads.
+
+4. Although multi-processing can prevent the problem of global lock, memory cannot be shared between processes. Hence, we used multiprocessing.Manager model to hold the data we would like to share between processes. Besides, Manager model can also apply lock on the data it holds.
+
+5. According to the testing result in communication with the world simulator, responses we received could be misplaced regarding to their requests. 
+
+6. To deal with the issue mentioned in 5, we forked two processes that are specialized in receiving responses from the world and the ups, respectively. For each process, whenever receiving a response, this response should be handled by a process pool by executing the response's corresponding functionalities.
+
+7. We inherited the AbstractUser as our user model in the Django web app. The user model was extended with delivery address. However, the UserCreationForm cannot save this field in its save method. Hence, we overloaded the save method by saving the address field manually.
+
+8. Before playing on our web app, we should wait a few more seconds for the backend side to initialize. If we search products before initialization finishes, the web app will crash.
+
+9. Our backend might exit with message "[amazon] [DEBUG] Stop receiving! Please re-start the backend." if it loses connection with the ups server, or the ups server sends illegal message. The program should be restart manually if the backend exits.
+
+10. When submitting multiple orders in a short period, in "put on truck" stage, we might not be able to receiving the responses of some orders from the world.

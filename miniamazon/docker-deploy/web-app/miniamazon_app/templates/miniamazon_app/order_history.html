@@ -1,0 +1,26 @@
+{% extends "miniamazon_app/base.html" %}
+
+{% block content %}
+<h3>History Orders</h3>
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th scope="col">Order ID</th>
+    <th scope="col">Status</th>
+    <th scope="col">Truck ID</th>
+    <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+</tr>
+</thead>
+
+<tbody>
+    {% for oc in order_collection %}
+        <tr>
+            <td>{{oc.order_collection_id}}</td>
+            <td>{{oc.status}}</td>
+            <td>{{oc.truck_id}}</td>
+            <td><a href="{% url 'order-detail' oc.order_collection_id %}">Order Detail</a></td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% endblock content %}

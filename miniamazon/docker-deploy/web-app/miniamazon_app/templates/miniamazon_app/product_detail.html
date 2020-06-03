@@ -1,0 +1,33 @@
+{% extends "miniamazon_app/home.html" %}
+
+{% block content %}
+<h3>Product Details</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Warehouse ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Storage</th>
+      <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      {% for wh in product.warehouse.all%}
+        <tr>
+          <td>{{wh.warehouse_id}}</td>
+          <td>{{product.name}}</td>
+          <td>
+            {% for ls in storage %}
+              {% if ls.warehouse.warehouse_id == wh.warehouse_id%}
+                {{ls.storage}}
+              {% else %}
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td><a href="{% url 'product-amount' product.product_id wh.warehouse_id %}">Add To Cart</a></td>
+        </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

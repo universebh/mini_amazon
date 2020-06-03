@@ -1,0 +1,31 @@
+{% extends "miniamazon_app/base.html" %}
+
+{% block content %}
+<h3>Delivery Address</h3>
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th scope="col">X Coordinate</th>
+    <th scope="col">Y Coordinate</th>
+    <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+    </tr>
+</thead>
+
+<tbody>
+    
+    <tr>
+        <td>{{ delivery_addr.x }}</td>
+        <td>{{ delivery_addr.y }}</td>
+        <td><a href="{% url 'change-delivery-addr' %}">Change Address</a></td>
+    </tr>
+    
+</tbody>
+</table>
+
+<div class = "row">
+    <div class = 'col-md-2'></div>
+      <div class = 'col-md-10'>
+        <a href="{%url 'amazon-home'%}">Back To Homepage</a>
+      </div>
+</div>
+{% endblock content %}

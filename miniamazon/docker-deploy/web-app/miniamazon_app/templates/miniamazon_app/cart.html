@@ -1,0 +1,53 @@
+{% extends "miniamazon_app/base.html" %}
+<!-- Side Bar -->
+{% block content1 %}
+<div class="content-section">
+    <h3>Options</h3>
+    <p class='text-muted'>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-light"><a href="{% url 'delivery-addr' %}">Address</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'amazon-cart' %}">Cart</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'order-history' %}">Orders</a></li>
+        </ul>
+    </p>
+</div>
+{% endblock content1%}
+
+
+
+{% block content %}
+<h3>Shopping Cart Details</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Warehouse ID</th>
+      <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      {% for ct in cart %}
+        {% for pd in ct.product.all %}
+          {% for wh in pd.warehouse.all %}
+            <tr>
+              <td>{{pd.name}}</td>
+              <td>{{ct.amount}}</td>
+              <td>{{wh.warehouse_id}}</td>
+              <td><a href="{% url 'cart-delete' ct.cart_id %}">Delete</a></td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+  </tbody>
+</table>
+
+<div class = "row">
+  <div class = 'col-md-2'></div>
+    <div class = 'col-md-10'>
+        <button onclick="window.location.href='/home/cart/processing/'">Place Order</button>
+    </div>
+</div>
+
+{% endblock content %}

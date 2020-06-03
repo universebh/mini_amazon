@@ -1,0 +1,36 @@
+{% extends "miniamazon_app/base.html" %}
+{% load crispy_forms_tags %} -->
+
+<!-- Side Bar -->
+{% block content1 %}
+<div class="content-section">
+    <h3>Options</h3>
+    <p class='text-muted'>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-light"><a href="{% url 'delivery-addr' %}">Address</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'amazon-cart' %}">Cart</a></li>
+            <li class="list-group-item list-group-item-light"><a href="{% url 'order-history' %}">Orders</a></li>
+        </ul>
+    </p>
+</div>
+{% endblock content1%}
+
+
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Determine quantity of products</legend>
+                {{form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Add to Cart</button>
+            </div>
+            <div class="form-group">
+                <a href="{% url 'amazon-home' %}">Back To Home Page</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

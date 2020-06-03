@@ -1,0 +1,24 @@
+{% extends "miniamazon_app/base.html" %}
+
+{% block content %}
+<h3>Order Detail</h3>
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th scope="col">Product Name</th>
+    <th scope="col">Warehouse ID</th>
+    <th scope="col">Amount</th>
+</tr>
+</thead>
+
+<tbody>
+    {% for oc_data in order_collection_data %}
+        <tr>
+            <td>{{oc_data.0}}</td>
+            <td>{{oc_data.1}}</td>
+            <td>{{oc_data.2}}</td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% endblock content %}

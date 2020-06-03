@@ -1,0 +1,22 @@
+
+Differentiation
+1. Customer can put selected products in a shopping cart and check them out later on if he does not plan to place an order soon:
+e.g. A customer can put 5 apples in his shopping cart and then log out, later on he can login again and add other fruits into the shopping cart.
+
+2. Customer can check all the placed orders in the order history page by clicking on the orders link on the right side of the page.
+e.g. A customer can see the order ID, order status, as well as the truck ID which delivers this package in the order history page.
+
+3. Customer can search products he wants to buy from a scroll down menu in navigation bar, which is very similar to the real Amamzon page.
+e.g. For the demo purpose we put five different fruits from which user can select to buy.
+
+4. Customer can check the storage of each kind of fruit in the warehouse after clicking on the search button.
+e.g. When a customer selects "apple" from the scroll down menu and then clicks on the Search button, he can see the left storage of apples in the warehouse before determining buy how many.
+
+5. Performance and Robustness of back end includes following:
+(1) World simulator's response contains just ack number and no corresponding response message.
+(2) Using one thread to handle listening "UTruckArrived" from the UPS side and another to handle sending "APack" to world simulator. Then the main thread waits until both are finished to ensure putting the package on truck only after the package is packed and truck has arrived.
+(3) Handling the package loss due to world simulator flakeness using exceptions and resending. Handling socket blocking by setting timeout.
+(4) Using a request queue to receive request messages from both customer side and UPS side and then using. For the client side, a request is sent when the warehouse storage is not enough to meet customer's demand on certain product and restoring products from world is necessary. 
+For the UPS side, the UTruckArrived and UDelivered messages are also put in this queue.
+(5) Similarly using a response queue to put responses from both world and UPS side and opens a thread per response to handle the response. 
+(6) Using a process pool to handle request to enhance the performance.
